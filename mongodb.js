@@ -12,8 +12,15 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
         console.log('Unable to connect to database');
     }
     const db = client.db(databaseName);
+    db.collection('users').findOne({ name: 'Tony' }, (error, user) => {
+        if (error) {
+            return console.log('unable to find user');
+        }
+        console.log(user);
+    })
     // db.collection('users').insertOne({
-    //     name: 'Davi',
+    //     _id: id,
+    //     name: 'Tony',
     //     age: 38
     // }, (error, result) => {
     //     if (error) {
@@ -36,24 +43,7 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     //     }
     //     console.log(result.ops);
     // })
-    db.collection('task').insertMany([
-        {
-            description: 'wash the dish',
-            completed: true
-
-        }, {
-            description: 'learn something new',
-            completed: true
-        }, {
-            description: 'pay the bills',
-            completed: false
-        }
-    ], (error, result) => {
-        if (error) {
-            return console.log('unable to insert user');
-        }
-        console.log(result.ops);
-    })
+    //  
 })
 
 
