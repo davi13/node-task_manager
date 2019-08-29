@@ -52,15 +52,19 @@ const Task = mongoose.model('Task', {
         type: String,
         required: true,
         trim: true,
-        minlength: 6,
-
+        minlength: 7,
+        validate(value) {
+            if (value.includes('password')) {
+                throw new Error('Your password must not be password');
+            }
+        }
 
     }
 });
 const task = new Task({
     description: 'tidy the house',
     completed: false,
-    password: ' blanco '
+    password: 'password'
 })
 task.save().then((task) => {
     console.log(task);
