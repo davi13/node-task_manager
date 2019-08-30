@@ -5,6 +5,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
     useNewUrlParser: true,
     useCreateIndex: true
 });
+// Users
 const User = mongoose.model('User', {
     name: {
         type: String,
@@ -41,6 +42,7 @@ const User = mongoose.model('User', {
 // }).catch((error) => {
 //     console.log('Error ', error);
 // })
+// Tasks 
 const Task = mongoose.model('Task', {
     description: {
         type: String,
