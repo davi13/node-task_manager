@@ -56,14 +56,11 @@ const Task = mongoose.model('Task', {
         required: true,
         trim: true,
         minlength: 7,
-
-
     }
 });
 const task = new Task({
     description: 'tidy the house',
     completed: false,
-    password: 'password'
 })
 task.save().then((task) => {
     console.log(task);
