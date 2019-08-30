@@ -53,7 +53,7 @@ const Task = mongoose.model('Task', {
     },
 });
 const task = new Task({
-    description: 'tidy the house',
+    description: 'walk out the dog',
     completed: false,
 })
 task.save().then((task) => {
