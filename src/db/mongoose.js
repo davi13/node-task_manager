@@ -44,7 +44,8 @@ const User = mongoose.model('User', {
 const Task = mongoose.model('Task', {
     description: {
         type: String,
-        trim: true
+        trim: true,
+        required: true
     },
     completed: {
         type: Boolean,
@@ -55,11 +56,7 @@ const Task = mongoose.model('Task', {
         required: true,
         trim: true,
         minlength: 7,
-        validate(value) {
-            if (value.toLowerCase().includes('password')) {
-                throw new Error('Your password must not be password');
-            }
-        }
+
 
     }
 });
