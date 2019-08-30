@@ -51,12 +51,6 @@ const Task = mongoose.model('Task', {
         type: Boolean,
         default: false,
     },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 7,
-    }
 });
 const task = new Task({
     description: 'tidy the house',
