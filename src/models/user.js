@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+const validator = require('validator');
 // Users
 const User = mongoose.model('User', {
     name: {
@@ -25,4 +27,4 @@ const User = mongoose.model('User', {
         }
     }
 });
-module.exports = user
+module.exports = user;
