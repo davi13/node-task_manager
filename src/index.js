@@ -14,6 +14,7 @@ app.post('/users', (req, res) => {
         res.send(user);
 
     }).catch((error) => {
+        res.status(400);
         res.send(error);
     })
 
