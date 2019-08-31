@@ -17,6 +17,17 @@ const User = mongoose.model('User', {
             }
         }
     },
+    password: {
+        type: String,
+        required: true,
+        minlength: 7,
+        trim: true,
+        validate(value) {
+            if (value.toLowerCase().includes('password')) {
+                throw new Error('password cannot conatin "password"');
+            }
+        }
+    },
     age: {
         type: Number,
         default: 0,
@@ -27,4 +38,5 @@ const User = mongoose.model('User', {
         }
     }
 });
-module.exports = user;
+
+module.exports = User;
