@@ -16,17 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
 //     console.log('Error ', error);
 // })
 // Tasks 
-// const Task = mongoose.model('Task', {
-//     description: {
-//         type: String,
-//         trim: true,
-//         required: true
-//     },
-//     completed: {
-//         type: Boolean,
-//         default: false,
-//     },
-// });
+// 
 // const task = new Task({
 //     description: 'walk out the dog',
 //     completed: false,
