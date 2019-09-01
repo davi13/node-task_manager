@@ -30,7 +30,10 @@ app.get('/users', (req, res) => {
 app.get('/user/:id ', (req, res) => {
     const _id = req.params;
     User.findById(_id).then((user) => {
-        res.send(users);
+        if (!user) {
+            return res.status(404).send();
+        }
+        res.send(user);
     }).catch((error) => {
         res.status(500).send()
     });
