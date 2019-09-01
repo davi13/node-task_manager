@@ -14,11 +14,17 @@ app.post('/users', (req, res) => {
     const user = new User(req.body);
     user.save().then(() => {
         res.send(user);
-
     }).catch((error) => {
         res.status(400).send(error);
     })
+});
 
+app.get('/users', (req, res) => {
+    user.find({}).then((users) => {
+        res.send(users)
+    }).catch((error) => {
+
+    })
 });
 
 app.post('/task', (req, res) => {
@@ -27,9 +33,7 @@ app.post('/task', (req, res) => {
         res.status(201).send(task);
     }).catch((error) => {
         res.status(400).send(error);
-
     });
-
 });
 
 app.listen(port, () => {
