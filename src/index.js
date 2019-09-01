@@ -20,11 +20,20 @@ app.post('/users', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-    user.find({}).then((users) => {
+    User.find({}).then((users) => {
         res.send(users)
     }).catch((error) => {
-
+        res.status(500).send();
     })
+});
+
+app.get('/user/:id ', (req, res) => {
+    const _id = req.params;
+    User.findById(_id).then((user) => {
+        res.send(users);
+    }).catch((error) => {
+        res.status(500).send()
+    });
 });
 
 app.post('/task', (req, res) => {
