@@ -15,7 +15,6 @@ const updateAgeAndCount = async (id, age) => {
     const count = await User.countDocuments({ age: 2 })
     return count;
 }
-
 updateAgeAndCount('5d683983189170c97af5a5b8', 1).then((count) => {
     console.log(count);
 }).catch((e) => {
