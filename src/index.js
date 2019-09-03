@@ -48,7 +48,7 @@ app.get('/users/:id', async (req, res) => {
         }
         res.send(user);
     } catch (e) {
-        res.status(500).send(error)
+        res.status(500).send(e)
 
     }
     // User.findById(_id).then((user) => {
@@ -60,16 +60,25 @@ app.get('/users/:id', async (req, res) => {
     //     res.status(500).send(error)
     // });
 });
+app.patch('/users/:id', async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!user) {
+            return res.status(404).send();
+        }
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
 
 app.post('/task', async (req, res) => {
-    const task = new Task(req.body);
     try {
+        const task = new Task(req.body);
         await task.save();
         res.status(201).send(task);
     } catch (e) {
         res.status(400).send(error);
     }
-
     // task.save().then(() => {
     //     res.status(201).send(task);
     // }).catch((error) => {
@@ -78,7 +87,6 @@ app.post('/task', async (req, res) => {
 });
 
 app.get('/task', async (req, res) => {
-
     try {
         const tasks = await Task.find({});
         res.send(tasks);
