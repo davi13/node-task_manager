@@ -132,12 +132,12 @@ app.get('/task/:id', async (req, res) => {
 });
 
 app.patch('/task/:id', async (req, res) => {
-    // const update = Object.keys();
-    // const allowedUpdtes = ['description', 'completed'];
-    // const isvalideOperation = updates.every((update) => allowedUpdtes.includes(update));
-    // if (!isvalideOperation) {
-    //     return res.status(400).send({ error: 'Invalid Updates' });
-    // }
+    const update = Object.keys();
+    const allowedUpdtes = ['description', 'completed'];
+    const isvalideOperation = updates.every((update) => allowedUpdtes.includes(update));
+    if (!isvalideOperation) {
+        return res.status(400).send({ error: 'Invalid Updates' });
+    }
 
     try {
         const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
