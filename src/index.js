@@ -66,6 +66,7 @@ app.patch('/users/:id', async (req, res) => {
         if (!user) {
             return res.status(404).send();
         }
+        res.send(user);
     } catch (e) {
         res.status(500).send(e)
     }
@@ -122,6 +123,21 @@ app.get('/task/:id', async (req, res) => {
     //     res.status(500).send(error)
     // });
 });
+
+app.patch('/task/:id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!task) {
+            res.status(404).send()
+        }
+        res.send(task);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+
+})
+
+
 
 
 
