@@ -132,7 +132,7 @@ app.get('/task/:id', async (req, res) => {
 });
 
 app.patch('/task/:id', async (req, res) => {
-    const update = Object.keys();
+    const updates = Object.keys(req.body);
     const allowedUpdtes = ['description', 'completed'];
     const isvalideOperation = updates.every((update) => allowedUpdtes.includes(update));
     if (!isvalideOperation) {
