@@ -10,12 +10,6 @@ router.post('/users', async (req, res) => {
     } catch (e) {
         res.status(400).send();
     }
-
-    // user.save().then(() => {
-    //     res.send(user);
-    // }).catch((error) => {
-    //     res.status(400).send(error);
-    // })
 });
 
 router.get('/users', async (req, res) => {
@@ -25,12 +19,6 @@ router.get('/users', async (req, res) => {
     } catch (e) {
         res.status(500).send();
     }
-
-    // User.find({}).then((users) => {
-    //     res.send(users)
-    // }).catch((error) => {
-    //     res.status(500).send();
-    // })
 });
 
 router.get('/users/:id', async (req, res) => {
@@ -45,14 +33,6 @@ router.get('/users/:id', async (req, res) => {
         res.status(500).send(e)
 
     }
-    // User.findById(_id).then((user) => {
-    //     if (!user) {
-    //         return res.status(404).send();
-    //     }
-    //     res.send(user);
-    // }).catch((error) => {
-    //     res.status(500).send(error)
-    // });
 });
 router.patch('/users/:id', async (req, res) => {
     const updates = Object.keys(req.body);
@@ -63,7 +43,10 @@ router.patch('/users/:id', async (req, res) => {
     }
 
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        const user = await User.findById(req.params.id)
+        updates.forEach((update) => user[update] = req.body[update]);
+        await user.save();
+        // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(404).send();
         }
