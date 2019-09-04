@@ -14,11 +14,9 @@ const port = process.env.PORT || 3000;
 // })
 
 app.use((req, res, next) => {
-    if (req.method === 'GET' || req.method === 'POST' || req.method === 'PATCH' || req.method === 'DELETE') {
-        res.status(503).send('Site is curently daow. check back soon !');
-    } else {
-        next();
-    }
+
+    res.status(503).send('Site is curently daow. check back soon !');
+
 })
 
 app.use(express.json());
