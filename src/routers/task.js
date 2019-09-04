@@ -10,11 +10,6 @@ router.post('/task', async (req, res) => {
     } catch (e) {
         res.status(400).send(error);
     }
-    // task.save().then(() => {
-    //     res.status(201).send(task);
-    // }).catch((error) => {
-    //     res.status(400).send(error);
-    // });
 });
 
 router.get('/task', async (req, res) => {
@@ -24,11 +19,6 @@ router.get('/task', async (req, res) => {
     } catch (e) {
         res.status(500).send();
     }
-    // Task.find({}).then((task) => {
-    //     res.send(task);
-    // }).catch((error) => {
-    //     res.status(500).send();
-    // })
 });
 
 
@@ -43,15 +33,6 @@ router.get('/task/:id', async (req, res) => {
     } catch (e) {
         res.status(500).send(error);
     }
-
-    // Task.findById(_id).then((task) => {
-    //     if (!task) {
-    //         return res.status(404).send();
-    //     }
-    //     res.send(task);
-    // }).catch((error) => {
-    //     res.status(500).send(error)
-    // });
 });
 
 router.patch('/task/:id', async (req, res) => {
@@ -63,7 +44,9 @@ router.patch('/task/:id', async (req, res) => {
     }
 
     try {
-        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        const task = await Task.findByIdAndUpdate(req.params.id);
+        updates.forEach((update) => task[update] = req.body[update]);
+        await task.save();
         if (!task) {
             res.status(404).send()
         }
