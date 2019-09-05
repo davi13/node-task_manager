@@ -13,11 +13,11 @@ const port = process.env.PORT || 3000;
 //     next();
 // })
 
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
 
-    res.status(503).send('Site is curently daow. check back soon !');
+//     res.status(503).send('Site is curently daow. check back soon !');
 
-})
+// })
 
 app.use(express.json());
 app.use(userRouter);
