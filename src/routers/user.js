@@ -47,13 +47,7 @@ router.post('/users/logoutAll', auth, async (req, res, next) => {
 })
 //Profile user
 router.get('/users/me', auth, async (req, res) => {
-    res.send(req.user)
-    // try {
-    //     const users = await User.find({});
-    //     res.send(users);
-    // } catch (e) {
-    //     res.status(500).send();
-    // }
+    res.send(req.user);
 });
 
 //Updateing User info in the user 
@@ -69,11 +63,6 @@ router.patch('/users/me', auth, async (req, res) => {
         req.user.update();
         updates.forEach((update) => req.user[update] = req.body[update]);
         await req.user.save();
-
-        // if (!user) {
-        //     return res.status(404).send();
-        // } 
-
         res.send(req.user);
     } catch (e) {
         res.status(500).send(e)
@@ -82,10 +71,6 @@ router.patch('/users/me', auth, async (req, res) => {
 //Ereasing user
 router.delete('/users/me', auth, async (req, res) => {
     try {
-        //     const user = await User.findByIdAndDelete(req.user._id);
-        //     if (!user) {
-        //         return res.status(404).send();
-        //     }
         await req.user.remove()
         res.send(req.user);
     } catch (e) {
