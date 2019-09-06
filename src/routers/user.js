@@ -32,17 +32,17 @@ router.post('/users/logout', auth, async (req, res, next) => {
         await req.user.save();
         res.send()
     } catch (e) {
-        res.status().send(e);
+        res.status(500).send(e);
     }
 });
 ////Logging out alll the users
 router.post('/users/logoutAll', auth, async (req, res, next) => {
     try {
-        const tokens = req.user.tokens;
-
-        res.send(tokens)
+        req.user.tokens = [];
+        await req.user.save()
+        res.send()
     } catch (e) {
-
+        res.status(500).send(e);
     }
 })
 //Profile user
