@@ -3,7 +3,7 @@ const router = new express.Router();
 const auth = require('../middleware/auth');
 const Task = require('../models/task');
 
-router.post('/task', auth, async (req, res) => {
+router.post('/tasks', auth, async (req, res) => {
     //const task = new Task(req.body);
     const task = new Task({
         ...req.body,
@@ -18,15 +18,19 @@ router.post('/task', auth, async (req, res) => {
     }
 });
 
-router.get('/tasks/', auth, async (req, res) => {
-
+//Get /tasks?completed=true
+router.get('/tasks', auth, async (req, res) => {
     //const tasks = await Task.find({ owner: req.user._id });
-
     try {
-        await req.user.populate('tasks').execPopulate();
+        await req.user.populate({
+            path: 'tasks',
+            match: {
+                completed: true
+            }
+        }).execPopulate();
         res.send(req.user.tasks);
     } catch (e) {
-        res.status(500).send();
+        res.status(500).send(e);
     }
 });
 
