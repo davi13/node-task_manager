@@ -19,7 +19,9 @@ router.post('/tasks', auth, async (req, res) => {
 });
 
 //Get /tasks?completed=true
-//tasks?limit=10&skip=0
+//Get /tasks?limit=10&skip=0
+//Get /tasks?sortBy=createdAt:desc
+
 router.get('/tasks', auth, async (req, res) => {
     //const tasks = await Task.find({ owner: req.user._id });
     const match = {}
@@ -32,8 +34,11 @@ router.get('/tasks', auth, async (req, res) => {
             path: 'tasks',
             match,
             options: {
-                limit: parseInt(req.query.limit)
-
+                limit: parseInt(req.query.limit),
+                skyp: parseInt(req.query.skyp),
+                sort: {
+                    createdAt: 1
+                }
             }
         }).execPopulate();
         res.send(req.user.tasks);
