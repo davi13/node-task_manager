@@ -80,12 +80,11 @@ router.delete('/users/me', auth, async (req, res) => {
 
     }
 });
-
+const upload = multer({
+    dest: 'avatars'
+});
 
 router.post('/users/me/avatar', upload.single('avatar'), (req, res) => {
-    const upload = multer({
-        dest: 'avatars'
-    });
     res.send();
 })
 
