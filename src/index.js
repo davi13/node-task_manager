@@ -27,6 +27,14 @@ const upload = multer({
     dest: 'images',
     limits: {
         fileSize: 1000000
+    }, fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(doc|docx)$/)) {
+            return cb(new Error('Please upload a PDF'));
+        }
+        cb(undefined, true);
+        // cb(new Error('file must be a PDF'));
+        // cb(undefined, true);
+        // cb(undefined, false);
     }
 })
 
