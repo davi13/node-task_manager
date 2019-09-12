@@ -104,11 +104,24 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
 router.delete('/users/me/avatar', auth, async (req, res) => {
     try {
         req.user.avatar = undefined;
-        req.user.save();
+        await req.user.save();
         res.status(200).send();
 
     } catch (e) {
         res.status(500).send(e);
+    }
+});
+
+router.get('/user/:id/avatar', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user || !user.avatar) {
+            throw new Error()
+        }
+        res.set('Content-type', 'image/jpg')
+
+    } catch (e) {
+        res.status(400).send();
     }
 })
 
