@@ -1,2 +1,2 @@
 node_modules/
-emails/account.js
+src/emails/account.js
