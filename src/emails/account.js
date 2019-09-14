@@ -17,9 +17,9 @@ const sendWelcomeEmail = (email, name) => {
 const sendCancelationEmail = (email, name) => {
     sgMail.send({
         to: email,
-        from: '',
+        from: process.env.EMAIL,
         subject: 'why are you leving ?',
-        text: `we soory that you want to leave ${name}, we hope you'll be back soon `
+        text: `we sorry that you want to leave ${name}, we hope you'll be back soon`
     })
 
 }
