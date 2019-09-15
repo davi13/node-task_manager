@@ -6,5 +6,5 @@ test('Should signup a new user', async () => {
         name: 'Picollo',
         email: 'davie0@xample.com',
         password: 'D123456'
-    }).expect(201)
+    }).expect(201);
 });
