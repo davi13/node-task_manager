@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const app = require('../src/app');
 const User = require('../src/models/user');
 
-const userId = new mongoose.Types.ObjectId();
+const userOneId = new mongoose.Types.ObjectId();
 
 const userOne = {
-    id: userId,
+    _id: userOneId,
     name: 'Broly',
     email: 'davie1@xample.com',
     password: 'D123456',
