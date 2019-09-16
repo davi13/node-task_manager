@@ -12,7 +12,7 @@ const userOne = {
     email: 'davie1@xample.com',
     password: 'D123456',
     token: [{
-        token: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET)
+        tokens: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET)
     }]
 }
 
@@ -42,4 +42,13 @@ test('Should not login nonexistent user', async () => {
         email: 'mywrong@email.com',
         password: 'notTheRight'
     }).expect(400);
+});
+
+
+test('Should get profile for user', async () => {
+    await request(app)
+        .get('/user/me')
+        .set('Authorization', ``)
+        .send()
+        .expect(200);
 })
