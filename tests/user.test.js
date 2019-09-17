@@ -102,7 +102,7 @@ test('Should uplaod avatar images', async () => {
 });
 
 test('Should update valid user fields', async () => {
-    const response = await request(app)
+    await request(app)
         .patch('/users/me')
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send({
@@ -110,3 +110,13 @@ test('Should update valid user fields', async () => {
         })
         .expect(200)
 });
+
+test('Should not update invalid user fields', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            loaction: 'Nowhere'
+        })
+        .expect(400);
+})
