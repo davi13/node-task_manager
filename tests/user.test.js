@@ -26,9 +26,13 @@ test('Should signup a new user', async () => {
         email: 'davie0@xample.com',
         password: 'D123456'
     }).expect(201);
+
     //Assert that database was changed correctly
     const user = await User.findById(response.body.user._id);
     expect(user).not.toBeNull();
+
+    //Assertions about the response
+    expect(response.body.user.name).toBe('Picollo');
 
 
 });
