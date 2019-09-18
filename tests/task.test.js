@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../src/app');
 const Task = require('../src/models/task');
 
-const { userOneId, userOne, setupDatabase } = require('./fixtures/db');
+const { userOneId, userOne, userTwo, setupDatabase } = require('./fixtures/db');
 
 beforeEach(setupDatabase);
 test('Should creat task for user', async () => {
@@ -30,4 +30,12 @@ test('Should fetch user tasks', async () => {
     // expect(task).not.toBeNull();
     // expect(task.length).toEqual(2);
 
-})
+});
+
+test('Should not userTwo delete a task for userOne', async () => {
+    const response = await request(app)
+    set('Authorization', `Bearer ${userTwo.tokens[0].token}`)
+        .delete('/tasks')
+        .send();
+    expect(400);
+}) 
