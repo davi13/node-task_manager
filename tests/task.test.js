@@ -34,8 +34,8 @@ test('Should fetch user tasks', async () => {
 
 test('Should not userTwo delete a task for userOne', async () => {
     const response = await request(app)
-    set('Authorization', `Bearer ${userTwo.tokens[0].token}`)
         .delete('/tasks')
+        .set('Authorization', `Bearer ${userTwo.tokens[0].token}`)
         .send();
     expect(400);
 }) 
