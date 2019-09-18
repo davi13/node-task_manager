@@ -19,13 +19,15 @@ test('Should creat task for user', async () => {
     expect(task.completed).toEqual(false);
 });
 
-test('Should show only the tasks sort by owner', async () => {
+test('Should fetch user tasks', async () => {
     const response = await request(app)
         .get('/tasks')
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
-    task = await response.body
-    expect(201);
-    expect(task).not.toBeNull();
-    expect(task).toEqual(response.body);
+        .send()
+    expect(200);
+    expect(response.body.length).toEqual(2);
+    //task = await response.body
+    // expect(task).not.toBeNull();
+    // expect(task.length).toEqual(2);
 
 })
