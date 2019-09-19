@@ -28,6 +28,15 @@ test('Should creat task for user', async () => {
     expect(task.completed).toEqual(false);
 });
 
+test('Should Not create task with invalid descrition / completed', async () => {
+    await request(app)
+        .post('/tasks')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(400)
+});
+
+
 test('Should fetch user tasks', async () => {
     const response = await request(app)
         .get('/tasks')
@@ -47,6 +56,40 @@ test('Should not delete other users task', async () => {
         .set('Authorization', `Bearer ${userTwo.tokens[0].token}`)
         .send()
         .expect(404);
-    const task = await Task.findById(taskOne._id)
+    const task = await Task.findById(taskOne._id);
     expect(task).not.toBeNull()
-}) 
+});
+
+
+
+// test('', async()=>{
+//     const response = await request(app)
+//     .patch('')
+//     .send()
+//     .expect()
+
+// })
+
+// test('', async()=>{
+//     const response = await request(app)
+//     .delete('')
+//     .send()
+//     .expect()
+
+// })
+
+// test('', async()=>{
+//     const response = await request(app)
+//     .delete('')
+//     .send()
+//     .expect()
+
+// })
+
+// test('', async()=>{
+//     const response = await request(app)
+//     .patch('')
+//     .send()
+//     .expect()
+
+// })
