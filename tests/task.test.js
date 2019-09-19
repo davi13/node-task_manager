@@ -33,16 +33,12 @@ test('Should Not create task with invalid descrition / completed', async () => {
         .post('/tasks')
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send({
-            description: null,
-            completed: null
+            description: null
         })
-        .expect(400)
-
-
-
+        .expect(400);
 });
 
-test('Should Not update task with invalid descrition / completed', async () => {
+test('Should Not update task with invalid description / completed', async () => {
     const response = await request(app)
         .patch(`/task/${taskOne._id}`)
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
@@ -51,7 +47,9 @@ test('Should Not update task with invalid descrition / completed', async () => {
             completed: null
         })
         .expect(400)
-    console.log(response)
+
+
+
 })
 
 test('Should fetch user tasks', async () => {
