@@ -49,9 +49,8 @@ test('Should Not update task with invalid descrition / completed', async () => {
         .send({
             description: null,
             completed: null
-
         })
-    //.expect(400)
+        .expect(400)
     console.log(response)
 })
 
