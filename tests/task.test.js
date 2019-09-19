@@ -47,7 +47,8 @@ test('Should Not update task with invalid descrition / completed', async () => {
         .patch(`/task/${taskOne._id}`)
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send({
-            description: null
+            description: null,
+            completed: null
 
         })
     //.expect(400)
