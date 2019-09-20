@@ -129,4 +129,15 @@ test('Should not update invalid user fields', async () => {
             loaction: 'Nowhere'
         })
         .expect(400);
-})
+});
+test('Should not update invalid profile wtih invalid name/email/password', async () => {
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            name: null,
+            email: null,
+            password: null
+        })
+        .expect(400);
+});
