@@ -28,6 +28,17 @@ test('Should signup a new user', async () => {
     expect(user.password).not.toBe('D123456')
 });
 
+test('Should not signup with invalid name/email/password', async () => {
+    const response = await request(app)
+        .post('/users')
+        .send({
+            name: null,
+            email: null,
+            password: null
+        })
+    expect(400);
+})
+
 test('Should login existing user', async () => {
     const response = await request(app).post('/users/login').send({
         email: userOne.email,
@@ -44,6 +55,8 @@ test('Should not login nonexistent user', async () => {
         password: 'notTheRight'
     }).expect(400);
 });
+
+
 
 test('Should get profile for user', async () => {
     await request(app)

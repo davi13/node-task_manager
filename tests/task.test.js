@@ -49,6 +49,18 @@ test('Should Not update task with invalid description / completed', async () => 
         .expect(400);
 })
 
+test('Should not update other users task', async () => {
+    const response = await request(app)
+        .patch(`/task/${taskThree._id}`)
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send({
+            description: 'my new task',
+            completed: true
+        })
+        .expect(404);
+    //console.log(response.body)
+});
+
 test('Should fetch user tasks', async () => {
     const response = await request(app)
         .get('/tasks')
