@@ -83,13 +83,13 @@ test('Should delete task', async () => {
     expect(tasks).toBeNull();
 })
 
-// test('', async()=>{
-//     const response = await request(app)
-//     .patch('')
-//     .send()
-//     .expect()
+test('Should not delete taks if unauthenticated', async () => {
+    const response = await request(app)
+        .patch(`/user${taskOne._id}`)
+        .send()
+        .expect(404)
 
-// })
+})
 
 
 
