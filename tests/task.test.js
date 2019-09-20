@@ -46,10 +46,7 @@ test('Should Not update task with invalid description / completed', async () => 
             description: null,
             completed: null
         })
-        .expect(400)
-
-
-
+        .expect(400);
 })
 
 test('Should fetch user tasks', async () => {
@@ -76,6 +73,15 @@ test('Should not delete other users task', async () => {
 });
 
 
+test('Should delete task', async () => {
+    const response = await request(app)
+        .delete(`/task/${taskOne._id}`)
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200);
+    const tasks = await Task.findById(taskOne._id);
+    expect(tasks).toBeNull();
+})
 
 // test('', async()=>{
 //     const response = await request(app)
@@ -85,13 +91,7 @@ test('Should not delete other users task', async () => {
 
 // })
 
-// test('', async()=>{
-//     const response = await request(app)
-//     .delete('')
-//     .send()
-//     .expect()
 
-// })
 
 // test('', async()=>{
 //     const response = await request(app)
