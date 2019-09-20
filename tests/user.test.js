@@ -73,16 +73,6 @@ test('Should no get profile for unauthenticated user', async () => {
         .expect(401);
 })
 
-test('Should delete account for user', async () => {
-    const response = await request(app)
-        .delete('/users/me')
-        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
-        .send()
-        .expect(200);
-    const user = await User.findById(userOneId);
-    expect(user).toBeNull();
-});
-
 test('Should not get account for unauthenticated user', async () => {
     await request(app)
         .delete('/users/me')
@@ -140,4 +130,21 @@ test('Should not update invalid profile wtih invalid name/email/password', async
             password: null
         })
         .expect(400);
+});
+
+test('Should delete account for user', async () => {
+    const response = await request(app)
+        .delete('/users/me')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200);
+    const user = await User.findById(userOneId);
+    expect(user).toBeNull();
+});
+
+test('Should not update if unauthenticated', async () => {
+    await request(app)
+        .delete('/users/me')
+        .send()
+        .expect(401);
 });
