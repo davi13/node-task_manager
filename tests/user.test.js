@@ -112,6 +112,15 @@ test('Should update valid user fields', async () => {
     expect(user.name).toEqual('Davi')
 });
 
+test('Should not update user if unauthenticated', async () => {
+    await request(app)
+        .patch('/users/me')
+        .send({
+            name: 'my name'
+        })
+        .expect(401);
+});
+
 test('Should not update invalid user fields', async () => {
     await request(app)
         .patch('/users/me')
