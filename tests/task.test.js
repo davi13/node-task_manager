@@ -58,7 +58,6 @@ test('Should not update other users task', async () => {
             completed: true
         })
         .expect(404);
-    //console.log(response.body)
 });
 
 test('Should fetch user tasks', async () => {
@@ -73,6 +72,19 @@ test('Should fetch user tasks', async () => {
     // expect(task.length).toEqual(2);
 
 });
+
+test('Should fetch tasks by Id', async () => {
+    const response = await request(app)
+        .get('/tasks')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200)
+    const task = await Task.find(response.body._id);
+    expect(task).not.toBeNull()
+
+
+});
+
 
 test('Should not delete other users task', async () => {
     const response = await request(app)
@@ -100,7 +112,6 @@ test('Should not delete taks if unauthenticated', async () => {
         .patch(`/user${taskOne._id}`)
         .send()
         .expect(404)
-
 })
 
 
