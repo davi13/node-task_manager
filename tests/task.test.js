@@ -78,11 +78,7 @@ test('Should fetch tasks by Id', async () => {
         .get('/tasks')
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send()
-        .expect(200)
-    const task = await Task.find(response.body._id);
-    expect(task).not.toBeNull()
-
-
+        .expect(200);
 });
 
 
