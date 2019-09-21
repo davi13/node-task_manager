@@ -112,6 +112,16 @@ test('Should sort tasks by decription/completed/createAt/updateAt', async () => 
         .expect(200);
 });
 
+test('Should sort tasks by decription/completed/createAt/updateAt', async () => {
+    const response = await request(app)
+        .get('/tasks?limit=1&skip=0')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200);
+    const task = await response.body
+    console.log(task);
+});
+
 
 test('Should not delete other users task', async () => {
     const response = await request(app)
