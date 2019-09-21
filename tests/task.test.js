@@ -102,8 +102,14 @@ test('Should fetch only incompleted Tasks', async () => {
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send()
         .expect(200);
-    const task = await response.body
-    console.log(task)
+});
+
+test('Should sort tasks by decription/completed/createAt/updateAt', async () => {
+    const response = await request(app)
+        .get('/tasks?description&completed&sortBy=createdAt:desc&updateAt:desc')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200);
 });
 
 
