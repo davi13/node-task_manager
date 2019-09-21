@@ -112,7 +112,7 @@ test('Should sort tasks by decription/completed/createAt/updateAt', async () => 
         .expect(200);
 });
 
-test('Should sort tasks by decription/completed/createAt/updateAt', async () => {
+test('Should fecth page of task', async () => {
     const response = await request(app)
         .get('/tasks?limit=1&skip=0')
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
