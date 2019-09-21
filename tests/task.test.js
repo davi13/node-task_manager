@@ -88,6 +88,17 @@ test('Should not fetch tasks by Id if unauthenticated', async () => {
         .expect(401)
 });
 
+test('Should fetch only completed Tasks', async () => {
+    const response = await request(app)
+        .get('/tasks?completed=true')
+        .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
+        .send()
+        .expect(200);
+
+    const task = response.body
+    console.log(task);
+});
+
 
 test('Should not delete other users task', async () => {
     const response = await request(app)
