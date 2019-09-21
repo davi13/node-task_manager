@@ -94,9 +94,6 @@ test('Should fetch only completed Tasks', async () => {
         .set('Authorization', `Bearer ${userOne.tokens[0].token}`)
         .send()
         .expect(200);
-
-    const task = response.body
-    console.log(task);
 });
 
 
