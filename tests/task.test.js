@@ -81,7 +81,7 @@ test('Should fetch tasks by Id', async () => {
         .expect(200)
 });
 
-test('Should fetch tasks by Id', async () => {
+test('Should not fetch tasks by Id if unauthenticated', async () => {
     const response = await request(app)
         .get('/tasks')
         .send()
